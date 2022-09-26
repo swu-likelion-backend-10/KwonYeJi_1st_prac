@@ -2,9 +2,11 @@ package com.likelion.swu_backend_02.post.dto;
 
 import com.likelion.swu_backend_02.post.domain.Board;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class BoardDto {
     private Long id;
     private String name;
