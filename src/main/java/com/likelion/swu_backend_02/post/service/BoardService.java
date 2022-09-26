@@ -70,4 +70,30 @@ public class BoardService {
     public void deletePost(Long id) {
         boardRepository.deleteById(id);
     }
+
+    /* Search */
+    @Transactional
+    public List<BoardDto> searchPost(String keyword) {
+        List<Board> boards = boardRepository.findByNameContaining(keyword);
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        if (boards.isEmpty()) return boardDtoList;
+
+        for (Board board : boards) {
+            boardDtoList.add(this.convertEntityToDto(board));
+        }
+
+        return boardDtoList;
+    }
+    private BoardDto convertEntityToDto(Board board) {
+        return BoardDto.builder()
+                .id(board.getId())
+                .name(board.getName())
+                .age(board.getAge())
+                .major(board.getMajor())
+                .introduce(board.getIntroduce())
+                .createdTime(board.getCreatedTime())
+                .modifiedTime(board.getModifiedTime())
+                .build();
+    }
 }

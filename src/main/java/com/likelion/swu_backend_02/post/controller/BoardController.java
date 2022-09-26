@@ -1,5 +1,6 @@
 package com.likelion.swu_backend_02.post.controller;
 
+import com.likelion.swu_backend_02.post.domain.Board;
 import com.likelion.swu_backend_02.post.service.BoardService;
 import com.likelion.swu_backend_02.post.dto.BoardDto;
 
@@ -17,7 +18,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String list(Model model) {
-        List<BoardDto> boardDtoList =boardService.getBoardList();
+        List<BoardDto> boardDtoList = boardService.getBoardList();
         model.addAttribute("boardList", boardDtoList);
 
         return "board/list.html"; }
@@ -57,5 +58,14 @@ public class BoardController {
     public String delete(@PathVariable("no") Long id) {
         boardService.deletePost(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/board/search")
+    public String search(@RequestParam(value="keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList = boardService.searchPost(keyword);
+
+        model.addAttribute("boardList", boardDtoList);
+
+        return "board/list.html";
     }
 }

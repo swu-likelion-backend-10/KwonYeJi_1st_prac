@@ -7,6 +7,16 @@
 <body>
 <h1>게시물 목록이 출력될 예정입니다.</h1>
 <a th:href="@{/post}">글쓰기</a>
+<br><br>
+
+<!-- 검색 -->
+<form action="/board/search" method="GET">
+    <div>
+        <input name="keyword" type="text" placeholder="검색">
+    </div>
+
+    <button>검색하기</button>
+</form>
 
 <table>
     <thread>
